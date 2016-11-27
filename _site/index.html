@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Ioannis Galatos &middot; Blog about Electronics, IoT and Blockchain
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo" style="align:center">
+      <img src="http://www.gravatar.com/avatar/4687d7b35ae880160548537d987018ee?s=120" />
+  </div>
+  <div id="contact-list" style="text-align:center">
+<!-- contact icons go here -->
+
+  <a href="https://github.com/ionsgltos">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-square-o fa-stack-2x"></i>
+      <i class="fa fa-github-alt fa-stack-1x"></i>
+    </span>
+  </a>
+
+
+        <a href="https://linkedin.com/in/ioannisgalatos">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-stack-1x"></i>
+          </span>
+        </a>
+
+
+        <a href="mailto: ionsgltos@gmail.com">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x"></i>
+          </span>
+        </a>
+      
+</div>
+  <div class="sidebar-item">
+    <p>Bits and Bytes</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+
+  <!--  <a class="sidebar-nav-item" href="/archive/v1.0.0.zip">Download</a> -->
+    <a class="sidebar-nav-item" href="">GitHub project</a>
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Ioannis Galatos</a>
+            <small>Blog about Electronics, IoT and Blockchain</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//2016/11/20/Smart-Home-Monitoring-with-Particle/">
+        Smart Home Monitoring with Particle Spark Core
+      </a>
+    </h1>
+
+    <span class="post-date">20 Nov 2016</span>
+
+    <p>In this article we are going to use Particle Core (ex-Spark) board to build a simple IoT project. We will use a humidity and temperature sensor (DHT22), sent the data to the Particle cloud and then visualise the measurements in real time.</p>
+
+<p>Particle core is a little board build around a Cortex M3 MCU and the WiFi CC33000 SoC from Texas Instruments. It connects automatically to the Particle cloud platform and it is instantly accesible from the web.</p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-20-Smart-Home-Monitoring-with-Particle/spark-core.jpg" alt="Spark Core" class="img-responsive" /></p>
+
+<p><strong>Hardware Configuration</strong></p>
+
+<p>For this project we are going to use the following components:</p>
+<ul>
+  <li>Particle Spark Core Board <a href="https://store.particle.io/">(link)</a></li>
+  <li>DHT22 temperature/humidity sensor <a href="https://www.adafruit.com/product/385">(link)</a></li>
+  <li>10K resistor</li>
+  <li>Breadboard</li>
+  <li>Jumper Wires</li>
+</ul>
+
+<p>Below are a schematic with all the different components of this project:</p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-20-Smart-Home-Monitoring-with-Particle/humidity_breadboard.png" alt="Breadboard View" class="img-responsive" /></p>
+
+<p>The DHT22 sensor has 4 pins. The left pin is the VCC and the right one the GND. Pin2 is the DataOut and Pin3 is not used. We connect Pin2 to the D3 pin of the Particle Core and  we also place the 10K resistor between Pin1 and Pin2 of the sensor.</p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-20-Smart-Home-Monitoring-with-Particle/humidity-circuit2.jpg" alt="Complete Circuit" class="img-responsive" /></p>
+
+<p><strong>The code</strong></p>
+
+<p>Particle has a web <a href="https://build.particle.io">IDE</a> that can be used to write and flash code onto particle devices. Additionally particle offers a Command Line Interface (CLI) to interact with devices and the particle cloud from the terminal. Find more information about how to install an use the CLI <a href="https://github.com/spark/particle-cli">here</a>.</p>
+
+<p>We are going to use Adafruit_DHT library for our project. If you are using  the web IDE then you can easily find and add the library from “libraries” menu. If you are using the CLI instead then download “Adafruit_DHT.cpp” and “Adafruit_DHT.h” from <a href="https://github.com/russgrue/Adafruit_DHT_Library/tree/master/firmware">this repository</a>  and save this files inside the same directory with the code below:</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="cp">#include "Adafruit_DHT.h"
+</span>
+<span class="c1">// DHT parameters
+</span><span class="cp">#define DHTPIN 3
+#define DHTTYPE DHT22
+</span>
+<span class="c1">// Variables
+</span><span class="kt">int</span> <span class="n">temperature</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">humidity</span><span class="p">;</span>
+
+<span class="c1">// Create an instance of DHT sensor
+</span><span class="n">DHT</span> <span class="n">dht</span><span class="p">(</span><span class="n">DHTPIN</span><span class="p">,</span> <span class="n">DHTTYPE</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Initialize DHT sensor
+</span>    <span class="n">dht</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Temperature measurement
+</span>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">dht</span><span class="p">.</span><span class="n">getTempCelcius</span><span class="p">();</span>
+
+    <span class="c1">// Humidity measurement
+</span>    <span class="n">humidity</span> <span class="o">=</span> <span class="n">dht</span><span class="p">.</span><span class="n">getHumidity</span><span class="p">();</span>
+
+    <span class="c1">// Use publish() function to send the data every 2 seconds on the Particle cloud platform:
+</span>    <span class="n">Spark</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"temperature"</span><span class="p">,</span> <span class="n">String</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span> <span class="o">+</span> <span class="s">" °C"</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+    <span class="n">Spark</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"humidity"</span><span class="p">,</span> <span class="n">String</span><span class="p">(</span><span class="n">humidity</span><span class="p">)</span> <span class="o">+</span> <span class="s">"%"</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+</code></pre>
+</div>
+<p><strong>Notes</strong></p>
+
+<p>Before flashing the code we need to know the device id:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>particle find
+</code></pre>
+</div>
+
+<p>and then use the command below to compile and flash the source code:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>particle flash 0123456789ABCDEFGHI dht22.ino Adafruit_DHT.cpp Adafruit_DHT.h
+</code></pre>
+</div>
+
+<p>Change 0123456789ABCDEFGHI with your device id.</p>
+
+<p><strong>Visualizing the data</strong></p>
+
+<p>The publish() function we use in our code allow us to sent data directly to the Particle cloud platform. We can see a live visualization of this data by going there:</p>
+
+<p><a href="https://console.particle.io/logs">https://console.particle.io/logs</a></p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-20-Smart-Home-Monitoring-with-Particle/console2.png" alt="Console Visualization" /></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//2016/11/19/Check-Temperature-and-Humidity-with-Arduino/">
+        Check Temperature and Humidity with DHT22 Sensor and Arduino
+      </a>
+    </h1>
+
+    <span class="post-date">19 Nov 2016</span>
+
+    <p>This tutorial shows a way to read humidity and temperature from the environment with an Arduino and displays them on a LCD screen.</p>
+
+<p>For this project we are going to use the following components:</p>
+<ul>
+  <li>Arduino board</li>
+  <li>20x4 Character LCD <a href="https://www.sparkfun.com/products/256">(link)</a></li>
+  <li>DHT22 temperature/humidity sensor <a href="https://www.adafruit.com/product/385">(link)</a></li>
+  <li>10K resistor</li>
+  <li>Breadboard</li>
+</ul>
+
+<p>The DHT22 is a low-cost digital sensor. It uses a capacitive sensor and a thermistor to measure the surrounding air. It is well calibrated and can measure humidity (0-100% RH) with +-2% and temperature(-40°C-80°C) with +-0.5°C accuracy.</p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-19-Check-Temperature-and-Humidity-with-Arduino/dht22.jpg" alt="DHT22 Module" class="img-responsive" /></p>
+
+<p>DHT22 sensor has 4 pins:</p>
+
+<ul>
+  <li>Pin1: VCC</li>
+  <li>Pin2: Data Out</li>
+  <li>Pin3: Not Connected</li>
+  <li>Pin4: GND</li>
+</ul>
+
+<p>We use a 20x4 LCD screen to display the results. Below are the pinouts from the LCD and the corresponding pin connection on the Arduino:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pin number</th>
+      <th>TextLCD pins</th>
+      <th>arduino pins</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>GND</td>
+      <td>0V</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>VCC</td>
+      <td>5V</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>VO</td>
+      <td>0V</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>RS</td>
+      <td>pin12</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>RW</td>
+      <td>0V</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>E</td>
+      <td>pin11</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>D0</td>
+      <td>not connected</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>D1</td>
+      <td>not connected</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>D2</td>
+      <td>not connected</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>D3</td>
+      <td>not connected</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>D4</td>
+      <td>pin7</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>D5</td>
+      <td>pin6</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>D6</td>
+      <td>pin5</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>D7</td>
+      <td>pin4</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>LED+</td>
+      <td>5V</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>LED-</td>
+      <td>0V</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Notes:</strong></p>
+<ul>
+  <li>
+    <p>Pin 3 gives contrast to the LCD screen and it is normally connected to a potentiometer.  If you don’t need to adjust the contrast then you can just connect this pin to ground.</p>
+  </li>
+  <li>
+    <p>Pin 5 is the read/write pin and can be in 2 modes. If it is in the write mode(LOW) then we can write(display) text to the LCD. When it is in the read mode(HIGH) we can read what the LCD is displaying. Since the latter is a rare situation, to make things simple we will have this pin permanently connected to the Ground pin of the arduino.</p>
+  </li>
+</ul>
+
+<p>Check below the final circuit:</p>
+
+<p><img src="http://localhost:4000/assets/images/2016-11-19-Check-Temperature-and-Humidity-with-Arduino/final_circuit.png" alt="The Final Circuit" class="img-responsive" /></p>
+
+<p><strong>Notes:</strong></p>
+<ul>
+  <li>Place a 10K resistor between VCC and the data pin to act as a pull-up resistor.</li>
+</ul>
+
+<h3 id="code">Code:</h3>
+
+<p>To use the DHT22 sensor you need to download and install the suitable library from adafruit’s github <a href="https://github.com/adafruit/DHT-sensor-library">page</a>. Download (or clone) the repository, rename the uncompressed folder to “DHT” and save it into the arduino “libraries” folder. For a more detailed tutorial on how to install arduino libraries check <a href="https://www.arduino.cc/en/Guide/Libraries">here</a>. Addittionaly you need to install the <a href="https://github.com/adafruit/Adafruit_Sensor">Adafruit_Sensor</a> library.</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code>
+<span class="c1">// include the library code:
+</span><span class="cp">#include &lt;LiquidCrystal.h&gt;
+#include &lt;DHT.h&gt;
+</span>
+<span class="cp">#define DHTPIN 2 //the digital pin where DHT22 sensor is connected
+#define DHTTYPE DHT22
+</span>
+<span class="c1">// initialize the library with the numbers of the interface pins
+</span><span class="n">LiquidCrystal</span> <span class="n">lcd</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="n">DHT</span> <span class="n">dht</span><span class="p">(</span><span class="n">DHTPIN</span><span class="p">,</span><span class="n">DHTTYPE</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">// set up the LCD's number of columns and rows:
+</span>  <span class="n">lcd</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="c1">// Print a message to the LCD.
+</span>  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"DHT22 test"</span><span class="p">);</span>
+  <span class="n">dht</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span> <span class="c1">//Wait a few seconds between measurements
+</span>  <span class="kt">float</span> <span class="n">h</span> <span class="o">=</span> <span class="n">dht</span><span class="p">.</span><span class="n">readHumidity</span><span class="p">();</span>
+  <span class="kt">float</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dht</span><span class="p">.</span><span class="n">readTemperature</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">||</span> <span class="n">isnan</span><span class="p">(</span><span class="n">t</span><span class="p">)){</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Failed to read from DHT sensor"</span><span class="p">);</span>
+  <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">//Compute the heat index in Celsius
+</span>  <span class="kt">float</span> <span class="n">hic</span> <span class="o">=</span> <span class="n">dht</span><span class="p">.</span><span class="n">computeHeatIndex</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="n">lcd</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Humidity: "</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span> <span class="p">(</span><span class="s">"%"</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">setCursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Temp: "</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span> <span class="p">(</span><span class="n">t</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"*C "</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">setCursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Heat Index: "</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">hic</span><span class="p">);</span>
+  <span class="n">lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"*C"</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p><strong>Notes</strong></p>
+<ul>
+  <li>The “heat index” is what the temperature feels like to the human body when relative humidity is combined with the air temperature. More information <a href="https://www.weather.gov/ama/heatindex">here</a>.</li>
+</ul>
+
+<iframe src="https://player.vimeo.com/video/192284512" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<p><a href="https://vimeo.com/192284512">Check Temperature and Humidity with DHT22 and Arduino</a> from <a href="https://vimeo.com/user59315970">Ioannis</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
