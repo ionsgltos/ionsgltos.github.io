@@ -10,7 +10,7 @@ highlighter:         rouge
 title:               Ioannis Galatos
 tagline:             'Blog about Electronics, IoT and Blockchain'
 description:         'Bits and Bytes'
-url:                 http://lanyon.getpoole.com
+url:                 https://ionsgltos.github.io/
 baseurl:             ''
 paginate:            5
 
